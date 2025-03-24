@@ -1,4 +1,4 @@
-import mysql.connector
+from sqlalchemy import create_engine
 import pandas as pd
 import re
 
@@ -13,17 +13,12 @@ def time_str_to_minutes(s):
         return int(re.search(r"(\d+)分", str(s)).group(1))
     return 0
 
+# 建立 SQLAlchemy 引擎（可重複使用）
+engine = create_engine("mysql+pymysql://root:1234@localhost:3306/0322") #root:改成你的MySQL密碼@localhost:3306/改成你的database名稱
+
 def get_data():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="1234",  # 改成你的 MySQL 密碼
-        database="0322"
-    )
-    # 查詢 績效日報表
     query = "SELECT * FROM 績效日報表"
-    df = pd.read_sql(query, conn)
-    conn.close()
+    df = pd.read_sql(query, engine)
 
     # 去除總計行
     df = df[~df["車牌"].astype(str).str.contains("總計", na=False)]
@@ -35,15 +30,6 @@ def get_data():
     return df
 
 def get_alcohol_data():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="1234",  # 改成你的 MySQL 密碼
-        database="0322"
-    )
-    # 查詢 酒測紀錄
     query = "SELECT * FROM 酒測紀錄"
-    df = pd.read_sql(query, conn)
-    conn.close()
-
+    df = pd.read_sql(query, engine)
     return df

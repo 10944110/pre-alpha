@@ -13,7 +13,7 @@ def get_data():
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="1234",  # <<< 請改為你的 MySQL 密碼
+        password="1234",  # <<< 改成你的 MySQL 密碼
         database="0322"
     )
     query = "SELECT * FROM 績效日報表"  # 資料表名稱是 sheet

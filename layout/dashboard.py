@@ -63,6 +63,7 @@ dashboard_layout = dbc.Container([
 
     dcc.Store(id="clickData-store"),
 
+
     dbc.Modal([
         dbc.ModalHeader(dbc.ModalTitle(id="modal-title")),
         dbc.ModalBody(id="modal-body"),

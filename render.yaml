@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: mysql-dash-app
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    plan: free
+    region: singapore

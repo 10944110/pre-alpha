@@ -1,6 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-from layout.dashboard import dashboard_layout
+from layout.index import dashboard_layout
 from callbacks.index import register_callbacks
 
 app = dash.Dash(
